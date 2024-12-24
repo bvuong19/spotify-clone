@@ -4,16 +4,15 @@ import SearchInput from "@/components/SearchInput";
 import SearchContent from "./components/SearchContent";
 
 interface SearchProps {
-    searchParams: Promise<{
-        title: string;
-    }>;
+    searchParams: Promise<{ title: string }>; 
 };
 
 export const revalidate = 0
 
 const Search = async ({ searchParams }: SearchProps) => {
-    const songs = await getSongsByTitle((await searchParams).title);
-
+    const resolvedParams = await searchParams; 
+    const songs = await getSongsByTitle(resolvedParams.title);
+    
     return (
         <div
             className="
